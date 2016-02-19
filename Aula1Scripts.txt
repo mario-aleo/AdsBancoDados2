@@ -1,0 +1,7 @@
+create database dbAula1
+
+drop database dbAula1
+
+create database dbAula1
+
+use dbAula1
