@@ -1,6 +1,8 @@
 create database Aula2
 
+
 use Aula2
+
 
 create table tb_client
 (
@@ -11,7 +13,9 @@ create table tb_client
 	salary		decimal(15,2)
 )
 
+
 drop table tb_client
+
 
 create table tb_client
 (
@@ -22,25 +26,34 @@ create table tb_client
 	salary		decimal(15,2)
 )
 
-insert into tb_client (name, birth, gender, salary)
-	values ('Mario', '1994-07-18', 'M', '1500.00')
-select * from tb_client (nolock)
 
 insert into tb_client (name, birth, gender, salary)
-	values ('Beatriz', '1992-07-10', 'F', '800.00'), ('Lucas', '1995-09-15', 'M', '1000.00')
+	values ('Mario', '1994-07-18', 'M', 1500.00)
 select * from tb_client (nolock)
 
+
 insert into tb_client (name, birth, gender, salary)
-	values ('Beatriz', '1992-07-10', 'F', '800.00'), ('Lucas', '1995-09-15', 'M', '1000.00')
+	values ('Beatriz', '1992-07-10', 'F', 800.00), ('Lucas', '1995-09-15', 'M', 1000.00)
 select * from tb_client (nolock)
+
+
+insert into tb_client
+	values ('Barbara', '1992-03-21', 'F', 900.00)
+select * from tb_client (nolock)
+
 
 --Begin Test Error
 insert into tb_client (name, birth, gender, salary)
 	values (151618, '1994.07.18', 'Male', 1500.08)
+
+insert into tb_client (name, birth, gender, salary)
+	values (6, 'Bianca', '1994-07-18', 'F', 1200.00)
 --End Test Error
 
-select * from tb_client (nolock)
-	where gender = 'M'
 
 select clientId, name from tb_client (nolock)
 	where gender = 'F'
+
+
+select clientId, name, salary from tb_client (nolock)
+	where salary >= 1000.00
