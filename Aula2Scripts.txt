@@ -57,3 +57,46 @@ select clientId, name from tb_client (nolock)
 
 select clientId, name, salary from tb_client (nolock)
 	where salary >= 1000.00
+
+insert into tb_client (name, birth, gender, salary)
+	values ('Bianca', '1994-07-18', 'F', 1200.00)
+select * from tb_client (nolock)
+
+
+update tb_client
+	set name = 'Biana'
+	where clientId = 6
+select * from tb_client (nolock)
+	where clientId = 6
+
+
+update tb_client
+	set salary = salary + 100
+	where gender = 'F'
+select * from tb_client (nolock)
+	where gender = 'F'
+
+create table tb_laboratorio
+(
+	tipoConta			varchar(9) not null,
+	numeroConta			integer not null,
+	valorJuros			decimal,
+	valorVencimento		decimal,
+	valorPagar			decimal not null,
+	datavencimento		date,
+	dataPagamento		date not null,
+	codigoCliente		integer,
+	nomeCliente			varchar(50),
+	codigoFornecedor	integer,
+	nomeFornecedor		varchar(50)
+)
+
+insert into tb_laboratorio (tipoConta, numeroConta, valorJuros, valorVencimento, valorPagar, datavencimento, dataPagamento, codigoCliente, nomeCliente, codigoFornecedor, nomeFornecedor)	values('A PAGAR',	10001,	0,		1500,	-1500,	'2012-02-11',	'2012-02-09',	NULL,	NULL,					1,		'COCA COLA'				)
+insert into tb_laboratorio (tipoConta, numeroConta, valorJuros, valorVencimento, valorPagar, datavencimento, dataPagamento, codigoCliente, nomeCliente, codigoFornecedor, nomeFornecedor)	values('A PAGAR',	10023,	10,		1000,	-1010,	'2012-02-11',	'2012-02-11',	NULL,	NULL,					1,		'COCA COLA'				)
+insert into tb_laboratorio (tipoConta, numeroConta, valorJuros, valorVencimento, valorPagar, datavencimento, dataPagamento, codigoCliente, nomeCliente, codigoFornecedor, nomeFornecedor)	values('A PAGAR',	10024,	0,		2000,	-2000,	'2012-02-11',	'2012-02-11',	NULL,	NULL,					2,		'MACRO DISTRIBUIDORA'	)
+insert into tb_laboratorio (tipoConta, numeroConta, valorJuros, valorVencimento, valorPagar, datavencimento, dataPagamento, codigoCliente, nomeCliente, codigoFornecedor, nomeFornecedor)	values('A RECEBER',	2023,	NULL,	NULL,	2000,	NULL,			'2012-02-20',	2,		'TIBURICO OLIVEIRA',	NULL,	NULL					)
+insert into tb_laboratorio (tipoConta, numeroConta, valorJuros, valorVencimento, valorPagar, datavencimento, dataPagamento, codigoCliente, nomeCliente, codigoFornecedor, nomeFornecedor)	values('A RECEBER',	2022,	NULL,	NULL,	500,	NULL,			'2012-02-21',	3,		'CAIO SAMPAIO',			NULL,	NULL					)
+insert into tb_laboratorio (tipoConta, numeroConta, valorJuros, valorVencimento, valorPagar, datavencimento, dataPagamento, codigoCliente, nomeCliente, codigoFornecedor, nomeFornecedor)	values('A RECEBER',	2022,	NULL,	NULL,	200,	NULL,			'2012-02-22',	3,		'CAIO SAMPAIO',			NULL,	NULL					)
+insert into tb_laboratorio (tipoConta, numeroConta, valorJuros, valorVencimento, valorPagar, datavencimento, dataPagamento, codigoCliente, nomeCliente, codigoFornecedor, nomeFornecedor)	values('A RECEBER',	2023,	NULL,	NULL,	1500,	NULL,			'2012-02-23',	4,		'LUCAS SILVA',			NULL,	NULL					)
+insert into tb_laboratorio (tipoConta, numeroConta, valorJuros, valorVencimento, valorPagar, datavencimento, dataPagamento, codigoCliente, nomeCliente, codigoFornecedor, nomeFornecedor) 	values('A RECEBER',	2023,	NULL,	NULL,	2000,	NULL,			'2012-02-24',	5,		'TIAGO FERNANDES',		NULL,	NULL					)
+select * from tb_laboratorio
