@@ -1,1 +1,15 @@
+create database aula3
 
+use aula3
+
+
+create table tb_produtos
+(
+	id integer identity,
+	descricao varchar(50),
+	preco float
+)
+
+insert into tb_produtos 
+values('Chocotone', 20.50)
+select * from tb_produtos
