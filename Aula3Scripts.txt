@@ -11,14 +11,14 @@ create table tb_produtos
 )
 
 insert into tb_produtos 
-values('Chocotone', 20.50)
+	values('Chocotone', 20.50)
 select * from tb_produtos (nolock)
 
 alter table tb_produtos
-add codigo varchar(50)
+	add codigo varchar(50)
 
 update tb_produtos
-set codigo = '94875893475984375'
+	set codigo = '94875893475984375'
 where id = 1
 
 
@@ -34,19 +34,18 @@ create table tb_veiculo
 )
 
 alter table tb_veiculo
-drop constraint chk_marca
+	drop constraint chk_marca
 
 alter table tb_veiculo
-add constraint checkMarca
-check(marca in('Ford', 'Fiat', 'Ferrari'))
+	add constraint checkMarca
+	check(marca in('Ford', 'Fiat', 'Ferrari'))
 
 insert into tb_veiculo
-values('atx1234', 'adwft094h57fk59dtr', 'Ford', null, 'vermelho')
+	values('atx1234', 'adwft094h57fk59dtr', 'Ford', null, 'vermelho')
 select * from tb_veiculo
 
 insert into tb_veiculo
-values('atx1234', 'adwft094h57fk59dtr', 'Jaguar', null, 'vermelho')
+	values('atx1234', 'adwft094h57fk59dtr', 'Jaguar', null, 'vermelho')
 select * from tb_veiculo
-
 
 
