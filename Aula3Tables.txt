@@ -1,1 +1,128 @@
+create database aula3
 
+use aula3
+
+
+create table tb_veiculo
+(
+	id integer identity,
+	modeloId integer,
+	placa varchar(7),
+	renavan varchar(11),
+	chassi varchar(17),
+	anoFabricacao integer,
+	anoModelo integer,
+	potencia decimal(10,2),
+	km decimal(10,2),
+	nroMotor integer
+)
+
+create table tb_modelo
+(
+	id integer identity,
+	marcaId integer,
+	descricao varchar(50),
+	situacao tinyint
+)
+
+create table tb_marca
+(
+	id integer identity,
+	descricao varchar(50),
+	situacao tinyint
+)
+
+create table tb_moto
+(
+	veiculoId integer,
+	tranpCarga integer
+)
+
+create table tb_carro
+(
+	veiculoId integer,
+	nroPortas integer
+)
+
+create table tb_motoristaVeiculo
+(
+	motoristaId integer,
+	veiculoId integer
+)
+
+create table tb_motorista
+(
+	id integer identity,
+	nome varchar(50),
+	cpf varchar(11),
+	rg varchar(11),
+	habilitacao varchar(2)
+)
+
+create table tb_movimentoVeiculo
+(
+	id integer identity,
+	tipoVeiculoId integer,
+	veiculoId integer,
+	dhEntrada datetime,
+	dhSaida datetime,
+	valor decimal(10,2)
+)
+
+create table tb_tipoVeiculo
+(
+	id integer identity,
+	descricao varchar(10),
+	valor decimal(10,2)
+)
+
+create table tb_veiculoOpcional
+(
+	veiculoId integer,
+	opcionalId integer
+)
+
+create table tb_opcional
+(
+	id integer identity,
+	descricao varchar(50),
+	situacao tinyint
+)
+
+create table tb_veiculoMotorizacao
+(
+	veiculoId integer,
+	motorizacaoId integer
+)
+
+create table tb_motorizacao
+(
+	id integer identity,
+	descricao varchar(50)
+)
+
+create table tb_veiculoCor
+(
+	veiculoId integer,
+	corId integer
+)
+
+create table tb_cor
+(
+	id integer identity,
+	descricao varchar(50),
+	situacao tinyint
+)
+
+create table tb_veiculoCombustivel
+(
+	veiculoId integer,
+	combustivelId integer
+)
+
+create table tb_combustivel
+(
+	id integer identity,
+	descricao varchar(50),
+	situacao tinyint
+)
