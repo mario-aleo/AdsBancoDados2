@@ -70,3 +70,27 @@ select * from tb_moto (nolock)
 insert into tb_moto
 	values('atx1234', '7495718345ndfjkshe', 'Yamaha', null, 'preta')
 select * from tb_moto (nolock)
+
+
+create table tb_marca
+(
+	id integer identity,
+	nome varchar(50) not null,
+	codigo varchar(50)
+)
+
+alter table tb_marca
+	add constraint pkNome
+	primary key(nome)
+
+insert into tb_marca
+	values('Honda', '8347238947923874')
+select * from tb_marca (nolock)
+
+insert into tb_marca
+	values('Honda', '9089239486452323')
+select * from tb_marca (nolock)
+
+insert into tb_marca
+	values(null, '9085637423745824')
+select * from tb_marca (nolock)
