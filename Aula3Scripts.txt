@@ -42,10 +42,31 @@ alter table tb_veiculo
 
 insert into tb_veiculo
 	values('atx1234', 'adwft094h57fk59dtr', 'Ford', null, 'vermelho')
-select * from tb_veiculo
+select * from tb_veiculo (nolock)
 
 insert into tb_veiculo
 	values('atx1234', 'adwft094h57fk59dtr', 'Jaguar', null, 'vermelho')
-select * from tb_veiculo
+select * from tb_veiculo (nolock)
 
 
+create table tb_moto
+(
+	id integer identity,
+	placa char(7) not null,
+	chassi char(18),
+	marca varchar(50),
+	modelo varchar(50),
+	cor varchar(50)
+)
+
+alter table tb_moto
+	add constraint uniquePlaca
+	unique(placa)
+
+insert into tb_moto
+	values('atx1234', 'adwft094h57fk59dtr', 'Honda', null, 'vermelho')
+select * from tb_moto (nolock)
+
+insert into tb_moto
+	values('atx1234', '7495718345ndfjkshe', 'Yamaha', null, 'preta')
+select * from tb_moto (nolock)
