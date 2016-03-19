@@ -1,6 +1,6 @@
-create database aula3
+create database aula4
 
-use aula3
+use aula4
 
 
 create table tb_veiculo
@@ -46,8 +46,8 @@ create table tb_carro
 
 create table tb_motoristaVeiculo
 (
-	motoristaId integer,
-	veiculoId integer
+	motoristaId integer not null,
+	veiculoId integer not null
 )
 
 create table tb_motorista
@@ -78,8 +78,8 @@ create table tb_tipoVeiculo
 
 create table tb_veiculoOpcional
 (
-	veiculoId integer,
-	opcionalId integer
+	veiculoId integer not null,
+	opcionalId integer not null
 )
 
 create table tb_opcional
@@ -91,8 +91,8 @@ create table tb_opcional
 
 create table tb_veiculoMotorizacao
 (
-	veiculoId integer,
-	motorizacaoId integer
+	veiculoId integer not null,
+	motorizacaoId integer not null
 )
 
 create table tb_motorizacao
@@ -103,8 +103,8 @@ create table tb_motorizacao
 
 create table tb_veiculoCor
 (
-	veiculoId integer,
-	corId integer
+	veiculoId integer not null,
+	corId integer not null
 )
 
 create table tb_cor
@@ -116,8 +116,8 @@ create table tb_cor
 
 create table tb_veiculoCombustivel
 (
-	veiculoId integer,
-	combustivelId integer
+	veiculoId integer not null,
+	combustivelId integer not null
 )
 
 create table tb_combustivel
@@ -126,3 +126,178 @@ create table tb_combustivel
 	descricao varchar(50),
 	situacao tinyint
 )
+
+//
+
+alter table tb_modelo
+	add constraint pk_modelo primary key (id)
+
+insert into tb_modelo
+	values(1, 'Fusca', null)
+insert into tb_modelo
+	values(2, 'Uno', null)
+insert into tb_modelo
+	values(3, 'Corsa', null)
+select * from tb_modelo
+
+//
+
+alter table tb_marca
+	add constraint pk_marca primary key (id)
+
+insert into tb_marca
+	values('Fiat', null)
+insert into tb_marca
+	values('Chevrolet', null)
+insert into tb_marca
+	values('Renault', null)
+select * from tb_marca
+
+alter table tb_modelo
+	add constraint fk_marca_modelo foreign key (marcaId)
+	references tb_marca (id)
+
+//
+
+select * from tb_modelo
+select * from tb_marca
+
+update tb_modelo
+	set marcaId = null
+	where id = 1
+update tb_modelo
+	set marcaId = 1
+	where id = 2
+update tb_modelo
+	set marcaId = 2
+	where id = 3
+
+//
+
+alter table tb_veiculo
+	add constraint pk_veiculo primary key (id)
+
+alter table tb_veiculo
+	add constraint fk_veiculo_modeloId foreign key (modeloId)
+	references tb_modelo (id)
+
+//
+
+alter table tb_motorista
+	add constraint pk_motorista primary key (id)
+
+alter table tb_motoristaVeiculo
+	add constraint pk_motoristaVeiculo primary key (veiculoId, motoristaId)
+
+alter table tb_motoristaVeiculo
+	add constraint fk_motoristaVeiculo_motoristaId foreign key (motoristaId)
+	references tb_motorista (id)
+
+alter table tb_motoristaVeiculo
+	add constraint fk_motoristaVeiculo_veiculoId foreign key (veiculoId)
+	references tb_veiculo (id)
+
+//
+
+alter table tb_tipoVeiculo
+	add constraint pk_tipoVeiculo primary key (id)
+
+alter table tb_movimentoVeiculo
+	add constraint pk_movimentoVeiculo primary key (id)
+
+alter table tb_movimentoVeiculo
+	add constraint fk_movimentoVeiculo_tipoVeiculo foreign key (tipoVeiculoId)
+	references tb_tipoVeiculo (id)
+
+alter table tb_movimentoVeiculo
+	add constraint fk_movimentoVeiculo_veiculoId foreign key (veiculoId)
+	references tb_veiculo (id)
+
+//
+
+alter table tb_carro
+	add constraint fk_carro_veiculoId foreign key (veiculoId)
+	references tb_veiculo (id)
+
+alter table tb_moto
+	add constraint fk_moto_VeiculoId foreign key (veiculoId)
+	references tb_veiculo (id)
+
+//
+
+alter table tb_combustivel
+	add constraint pk_combustivel primary key (id)
+
+alter table tb_veiculoCombustivel
+	add constraint pk_veiculoCombustivel primary key (veiculoId, combustivelId)
+
+alter table tb_veiculoCombustivel
+	add constraint fk_veiculoCombustivel_veiculoId foreign key (veiculoId)
+	references tb_veiculo (id)
+
+alter table tb_veiculoCombustivel
+	add constraint fk_veiculoCombustivel_combustivelId foreign key (combustivelId)
+	references tb_combustivel (id)
+
+//
+
+alter table tb_cor
+	add constraint pk_cor primary key (id)
+
+alter table tb_veiculoCor
+	add constraint pk_veiculoCor primary key (veiculoId, corId)
+
+alter table tb_veiculoCor
+	add constraint fk_veiculoCor_veiculoId foreign key (veiculoId)
+	references tb_veiculo (id)
+
+alter table tb_veiculoCor
+	add constraint fk_veiculoCor_corId foreign key (corId)
+	references tb_cor (id)
+
+//
+
+alter table tb_motorizacao
+	add constraint pk_motorizacao primary key (id)
+
+alter table tb_veiculoMotorizacao
+	add constraint pk_veiculoMotorizacao primary key (veiculoId, motorizacaoId)
+
+alter table tb_veiculoMotorizacao
+	add constraint fk_veiculoMotorizacao_veiculoId foreign key (veiculoId)
+	references tb_veiculo (id)
+
+alter table tb_veiculoMotorizacao
+	add constraint fk_veiculoMotorizacao_motorizacaoId foreign key (motorizacaoId)
+	references tb_motorizacao (id)
+
+//
+
+alter table tb_opcional
+	add constraint pk_opcional primary key (id)
+
+alter table tb_veiculoOpcional
+	add constraint pk_veiculoOpcional primary key (veiculoId, opcionalId)
+
+alter table tb_veiculoOpcional
+	add constraint fk_veiculoOpcional_veiculoId foreign key (veiculoId)
+	references tb_veiculo (id)
+
+alter table tb_veiculoOpcional
+	add constraint fk_veiculoOpcional_opcionalId foreign key (opcionalId)
+	references tb_opcional (id)
+
+//
+
+insert into tb_marca
+	values('Ferrari', null)
+insert into tb_marca
+	values('Porsh', null)
+select * from tb_marca (nolock)
+
+
+insert into tb_modelo
+	values(4, 'Enzo', null)
+insert into tb_modelo
+	values(1, 'Punto', null)
+select * from tb_modelo (nolock)
