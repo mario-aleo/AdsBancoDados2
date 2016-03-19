@@ -34,14 +34,14 @@ create table tb_marca
 
 create table tb_moto
 (
-	veiculoId integer,
-	tranpCarga integer
+	veiculoId integer not null,
+	tranpCarga integer not null
 )
 
 create table tb_carro
 (
-	veiculoId integer,
-	nroPortas integer
+	veiculoId integer not null,
+	nroPortas integer not null
 )
 
 create table tb_motoristaVeiculo
@@ -216,8 +216,14 @@ alter table tb_movimentoVeiculo
 //
 
 alter table tb_carro
+	add constraint pk_carro primary key (veiculoId)
+
+alter table tb_carro
 	add constraint fk_carro_veiculoId foreign key (veiculoId)
 	references tb_veiculo (id)
+
+alter table tb_moto
+	add constraint pk_moto primary key (veiculoId)
 
 alter table tb_moto
 	add constraint fk_moto_VeiculoId foreign key (veiculoId)
@@ -301,3 +307,68 @@ insert into tb_modelo
 insert into tb_modelo
 	values(1, 'Punto', null)
 select * from tb_modelo (nolock)
+
+
+insert into tb_veiculo
+	values('1', 'placa01', null, null, '2014', '2014', null, '120', null)
+insert into tb_veiculo
+	values('2', 'placa02', null, null, '2014', '2014', null, '140', null)
+insert into tb_veiculo
+	values('3', 'placa03', null, null, '2014', '2014', null, '160', null)
+insert into tb_veiculo
+	values('4', 'placa04', null, null, '2014', '2014', null, '180', null)
+insert into tb_veiculo
+	values('5', 'placa05', null, null, '2014', '2014', null, '200', null)
+select * from tb_veiculo (nolock)
+
+
+insert into tb_motorista
+	values('Joao', null, null, 'C')
+insert into tb_motorista
+	values('Maria', null, null, 'B')
+insert into tb_motorista
+	values('Jose', null, null, 'B')
+insert into tb_motorista
+	values('Joaquin', null, null, 'AB')
+insert into tb_motorista
+	values('Mariana', null, null, 'A')
+select * from tb_motorista (nolock)
+
+
+insert into tb_motoristaVeiculo
+	values('1', '5')
+insert into tb_motoristaVeiculo
+	values('2', '4')
+insert into tb_motoristaVeiculo
+	values('3', '3')
+insert into tb_motoristaVeiculo
+	values('4', '2')
+insert into tb_motoristaVeiculo
+	values('5', '1')
+select * from tb_motoristaVeiculo (nolock)
+
+
+insert into tb_tipoVeiculo
+	values('descricao1', '52432')
+insert into tb_tipoVeiculo
+	values('descricao2', '43345')
+insert into tb_tipoVeiculo
+	values('descricao3', '31234')
+insert into tb_tipoVeiculo
+	values('descricao4', '21554')
+insert into tb_tipoVeiculo
+	values('descricao5', '11233')
+select * from tb_tipoVeiculo (nolock)
+
+
+insert into tb_movimentoVeiculo
+	values('1', '5', null, null, '2312')
+insert into tb_movimentoVeiculo
+	values('2', '4', null, null, '1213')
+insert into tb_movimentoVeiculo
+	values('3', '3', null, null, '1342')
+insert into tb_movimentoVeiculo
+	values('4', '2', null, null, '4561')
+insert into tb_movimentoVeiculo
+	values('5', '1', null, null, '6781')
+select * from tb_movimentoVeiculo (nolock)
