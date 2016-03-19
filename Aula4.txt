@@ -1,7 +1,8 @@
 create database aula4
+go
 
 use aula4
-
+go
 
 create table tb_veiculo
 (
