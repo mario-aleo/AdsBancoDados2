@@ -132,46 +132,17 @@ create table tb_combustivel
 alter table tb_modelo
 	add constraint pk_modelo primary key (id)
 
-insert into tb_modelo
-	values(1, 'Fusca', null)
-insert into tb_modelo
-	values(2, 'Uno', null)
-insert into tb_modelo
-	values(3, 'Corsa', null)
-select * from tb_modelo (nolock)
+
 
 
 
 alter table tb_marca
 	add constraint pk_marca primary key (id)
 
-insert into tb_marca
-	values('Fiat', null)
-insert into tb_marca
-	values('Chevrolet', null)
-insert into tb_marca
-	values('Renault', null)
-select * from tb_marca (nolock)
 
 alter table tb_modelo
 	add constraint fk_marca_modelo foreign key (marcaId)
 	references tb_marca (id)
-
-
-
-select * from tb_modelo (nolock)
-select * from tb_marca (nolock)
-
-update tb_modelo
-	set marcaId = null
-	where id = 1
-update tb_modelo
-	set marcaId = 1
-	where id = 2
-update tb_modelo
-	set marcaId = 2
-	where id = 3
-
 
 
 alter table tb_veiculo
@@ -294,14 +265,24 @@ alter table tb_veiculoOpcional
 	references tb_opcional (id)
 
 
-
+insert into tb_marca
+	values('Fiat', null)
+insert into tb_marca
+	values('Chevrolet', null)
+insert into tb_marca
+	values('Renault', null)
 insert into tb_marca
 	values('Ferrari', null)
 insert into tb_marca
 	values('Porsh', null)
 select * from tb_marca (nolock)
 
-
+insert into tb_modelo
+	values(1, 'Fusca', null)
+insert into tb_modelo
+	values(2, 'Uno', null)
+insert into tb_modelo
+	values(3, 'Corsa', null)
 insert into tb_modelo
 	values(4, 'Enzo', null)
 insert into tb_modelo
@@ -399,15 +380,15 @@ select * from tb_carro (nolock)
 
 
 insert into tb_moto
-	values('16', '0')
+	values('6', '0')
 insert into tb_moto
-	values('17', '0')
+	values('7', '0')
 insert into tb_moto
-	values('18', '0')
+	values('8', '0')
 insert into tb_moto
-	values('19', '1')
+	values('9', '1')
 insert into tb_moto
-	values('20', '1')
+	values('10', '1')
 select * from tb_moto (nolock)
 
 
