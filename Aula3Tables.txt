@@ -127,7 +127,7 @@ create table tb_combustivel
 	situacao tinyint
 )
 
-//
+
 
 alter table tb_modelo
 	add constraint pk_modelo primary key (id)
@@ -140,7 +140,7 @@ insert into tb_modelo
 	values(3, 'Corsa', null)
 select * from tb_modelo
 
-//
+
 
 alter table tb_marca
 	add constraint pk_marca primary key (id)
@@ -157,7 +157,7 @@ alter table tb_modelo
 	add constraint fk_marca_modelo foreign key (marcaId)
 	references tb_marca (id)
 
-//
+
 
 select * from tb_modelo
 select * from tb_marca
@@ -172,7 +172,7 @@ update tb_modelo
 	set marcaId = 2
 	where id = 3
 
-//
+
 
 alter table tb_veiculo
 	add constraint pk_veiculo primary key (id)
@@ -181,7 +181,7 @@ alter table tb_veiculo
 	add constraint fk_veiculo_modeloId foreign key (modeloId)
 	references tb_modelo (id)
 
-//
+
 
 alter table tb_motorista
 	add constraint pk_motorista primary key (id)
@@ -197,7 +197,7 @@ alter table tb_motoristaVeiculo
 	add constraint fk_motoristaVeiculo_veiculoId foreign key (veiculoId)
 	references tb_veiculo (id)
 
-//
+
 
 alter table tb_tipoVeiculo
 	add constraint pk_tipoVeiculo primary key (id)
@@ -213,7 +213,7 @@ alter table tb_movimentoVeiculo
 	add constraint fk_movimentoVeiculo_veiculoId foreign key (veiculoId)
 	references tb_veiculo (id)
 
-//
+
 
 alter table tb_carro
 	add constraint pk_carro primary key (veiculoId)
@@ -229,7 +229,7 @@ alter table tb_moto
 	add constraint fk_moto_VeiculoId foreign key (veiculoId)
 	references tb_veiculo (id)
 
-//
+
 
 alter table tb_combustivel
 	add constraint pk_combustivel primary key (id)
@@ -245,7 +245,7 @@ alter table tb_veiculoCombustivel
 	add constraint fk_veiculoCombustivel_combustivelId foreign key (combustivelId)
 	references tb_combustivel (id)
 
-//
+
 
 alter table tb_cor
 	add constraint pk_cor primary key (id)
@@ -261,7 +261,7 @@ alter table tb_veiculoCor
 	add constraint fk_veiculoCor_corId foreign key (corId)
 	references tb_cor (id)
 
-//
+
 
 alter table tb_motorizacao
 	add constraint pk_motorizacao primary key (id)
@@ -277,7 +277,7 @@ alter table tb_veiculoMotorizacao
 	add constraint fk_veiculoMotorizacao_motorizacaoId foreign key (motorizacaoId)
 	references tb_motorizacao (id)
 
-//
+
 
 alter table tb_opcional
 	add constraint pk_opcional primary key (id)
@@ -293,7 +293,7 @@ alter table tb_veiculoOpcional
 	add constraint fk_veiculoOpcional_opcionalId foreign key (opcionalId)
 	references tb_opcional (id)
 
-//
+
 
 insert into tb_marca
 	values('Ferrari', null)
@@ -319,6 +319,17 @@ insert into tb_veiculo
 	values('4', 'placa04', null, null, '2014', '2014', null, '180', null)
 insert into tb_veiculo
 	values('5', 'placa05', null, null, '2014', '2014', null, '200', null)
+
+insert into tb_veiculo
+	values('1', 'placa06', null, null, '2014', '2014', null, '220', null)
+insert into tb_veiculo
+	values('2', 'placa07', null, null, '2014', '2014', null, '240', null)
+insert into tb_veiculo
+	values('3', 'placa08', null, null, '2014', '2014', null, '260', null)
+insert into tb_veiculo
+	values('4', 'placa09', null, null, '2014', '2014', null, '280', null)
+insert into tb_veiculo
+	values('5', 'placa10', null, null, '2014', '2014', null, '400', null)
 select * from tb_veiculo (nolock)
 
 
@@ -372,3 +383,133 @@ insert into tb_movimentoVeiculo
 insert into tb_movimentoVeiculo
 	values('5', '1', null, null, '6781')
 select * from tb_movimentoVeiculo (nolock)
+
+
+insert into tb_carro
+	values('1', '2')
+insert into tb_carro
+	values('2', '2')
+insert into tb_carro
+	values('3', '2')
+insert into tb_carro
+	values('4', '4')
+insert into tb_carro
+	values('5', '4')
+select * from tb_carro (nolock)
+
+
+insert into tb_moto
+	values('16', '0')
+insert into tb_moto
+	values('17', '0')
+insert into tb_moto
+	values('18', '0')
+insert into tb_moto
+	values('19', '1')
+insert into tb_moto
+	values('20', '1')
+select * from tb_moto (nolock)
+
+
+insert into tb_opcional
+	values('descricao1', null)
+insert into tb_opcional
+	values('descricao2', null)
+insert into tb_opcional
+	values('descricao3', null)
+insert into tb_opcional
+	values('descricao4', null)
+insert into tb_opcional
+	values('descricao5', null)
+select * from tb_opcional (nolock)
+
+
+insert into tb_veiculoOpcional
+	values('1', '5')
+insert into tb_veiculoOpcional
+	values('2', '4')
+insert into tb_veiculoOpcional
+	values('3', '3')
+insert into tb_veiculoOpcional
+	values('4', '2')
+insert into tb_veiculoOpcional
+	values('5', '1')
+select * from tb_veiculoOpcional (nolock)
+
+
+insert into tb_motorizacao
+	values('descricao1')
+insert into tb_motorizacao
+	values('descricao2')
+insert into tb_motorizacao
+	values('descricao3')
+insert into tb_motorizacao
+	values('descricao4')
+insert into tb_motorizacao
+	values('descricao5')
+select * from tb_motorizacao (nolock)
+
+
+insert into tb_veiculoMotorizacao
+	values('1', '5')
+insert into tb_veiculoMotorizacao
+	values('2', '4')
+insert into tb_veiculoMotorizacao
+	values('3', '3')
+insert into tb_veiculoMotorizacao
+	values('4', '2')
+insert into tb_veiculoMotorizacao
+	values('5', '1')
+select * from tb_veiculoMotorizacao (nolock)
+
+
+insert into tb_cor
+	values('descricao1', null)
+insert into tb_cor
+	values('descricao2', null)
+insert into tb_cor
+	values('descricao3', null)
+insert into tb_cor
+	values('descricao4', null)
+insert into tb_cor
+	values('descricao5', null)
+select * from tb_cor (nolock)
+
+
+insert into tb_veiculoCor
+	values('1', '5')
+insert into tb_veiculoCor
+	values('2', '4')
+insert into tb_veiculoCor
+	values('3', '3')
+insert into tb_veiculoCor
+	values('4', '2')
+insert into tb_veiculoCor
+	values('5', '1')
+select * from tb_veiculoCor (nolock)
+
+
+insert into tb_combustivel
+	values('descricao1', null)
+insert into tb_combustivel
+	values('descricao2', null)
+insert into tb_combustivel
+	values('descricao3', null)
+insert into tb_combustivel
+	values('descricao4', null)
+insert into tb_combustivel
+	values('descricao5', null)
+select * from tb_combustivel (nolock)
+
+
+insert into tb_veiculoCombustivel
+	values('1', '5')
+insert into tb_veiculoCombustivel
+	values('2', '4')
+insert into tb_veiculoCombustivel
+	values('3', '3')
+insert into tb_veiculoCombustivel
+	values('4', '2')
+insert into tb_veiculoCombustivel
+	values('5', '1')
+select * from tb_veiculoCombustivel (nolock)
