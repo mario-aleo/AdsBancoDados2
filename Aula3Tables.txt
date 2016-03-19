@@ -138,7 +138,7 @@ insert into tb_modelo
 	values(2, 'Uno', null)
 insert into tb_modelo
 	values(3, 'Corsa', null)
-select * from tb_modelo
+select * from tb_modelo (nolock)
 
 
 
@@ -151,7 +151,7 @@ insert into tb_marca
 	values('Chevrolet', null)
 insert into tb_marca
 	values('Renault', null)
-select * from tb_marca
+select * from tb_marca (nolock)
 
 alter table tb_modelo
 	add constraint fk_marca_modelo foreign key (marcaId)
@@ -159,8 +159,8 @@ alter table tb_modelo
 
 
 
-select * from tb_modelo
-select * from tb_marca
+select * from tb_modelo (nolock)
+select * from tb_marca (nolock)
 
 update tb_modelo
 	set marcaId = null
