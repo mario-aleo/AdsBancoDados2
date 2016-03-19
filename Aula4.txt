@@ -12,9 +12,9 @@ create table tb_veiculo
 	chassi varchar(17),
 	anoFabricacao integer,
 	anoModelo integer,
-	potencia decimal(10,2),
-	km decimal(10,2),
-	nroMotor integer
+	potencia decimal(10,2) not null,
+	km decimal(10,2) not null,
+	nroMotor integer not null
 )
 
 create table tb_modelo
@@ -211,10 +211,12 @@ alter table tb_veiculoCombustivel
 alter table tb_veiculoCombustivel
 	add constraint fk_veiculoCombustivel_veiculoId foreign key (veiculoId)
 	references tb_veiculo (id)
+	ON DELETE CASCADE
 
 alter table tb_veiculoCombustivel
 	add constraint fk_veiculoCombustivel_combustivelId foreign key (combustivelId)
 	references tb_combustivel (id)
+	ON DELETE CASCADE
 
 
 
@@ -227,11 +229,12 @@ alter table tb_veiculoCor
 alter table tb_veiculoCor
 	add constraint fk_veiculoCor_veiculoId foreign key (veiculoId)
 	references tb_veiculo (id)
+	ON DELETE CASCADE
 
 alter table tb_veiculoCor
 	add constraint fk_veiculoCor_corId foreign key (corId)
 	references tb_cor (id)
-
+	ON DELETE CASCADE
 
 
 alter table tb_motorizacao
@@ -243,10 +246,12 @@ alter table tb_veiculoMotorizacao
 alter table tb_veiculoMotorizacao
 	add constraint fk_veiculoMotorizacao_veiculoId foreign key (veiculoId)
 	references tb_veiculo (id)
+	ON DELETE CASCADE
 
 alter table tb_veiculoMotorizacao
 	add constraint fk_veiculoMotorizacao_motorizacaoId foreign key (motorizacaoId)
 	references tb_motorizacao (id)
+	ON DELETE CASCADE
 
 
 
@@ -259,58 +264,93 @@ alter table tb_veiculoOpcional
 alter table tb_veiculoOpcional
 	add constraint fk_veiculoOpcional_veiculoId foreign key (veiculoId)
 	references tb_veiculo (id)
+	ON DELETE CASCADE
 
 alter table tb_veiculoOpcional
 	add constraint fk_veiculoOpcional_opcionalId foreign key (opcionalId)
 	references tb_opcional (id)
+	ON DELETE CASCADE
 
 
+alter table tb_marca
+	add constraint ck_marcaSituacao check (situacao in (1, 2))
+
+alter table tb_modelo
+	add constraint ck_modeloSituacao check (situacao in (1, 2))
+
+alter table tb_opcional
+	add constraint ck_opcionalSituacao check (situacao in (1, 2))
+
+alter table tb_cor
+	add constraint ck_corSituacao check (situacao in (1, 2))
+
+alter table tb_combustivel
+	add constraint ck_combustivelSituacao check (situacao in (1, 2))
+
+alter table tb_veiculo
+	add constraint ck_veiculoAnoFabricacao check (anoFabricacao <= anoModelo)
+
+alter table tb_movimentoVeiculo
+	add constraint ck_movimentoVeiculoDH check (dhEntrada < dhSaida)
+
+alter table tb_marca
+	add constraint unq_marcaDescricao unique (descricao)
+
+alter table tb_modelo
+	add constraint unq_modeloDescricao unique (descricao)
+
+create index indexDHSaida
+	on tb_movimentoVeiculo (dhSaida)
+
+create index indexDHSaidaDHEntrada
+	on tb_movimentoVeiculo (dhSaida, dhEntrada)
+
 insert into tb_marca
-	values('Fiat', null)
+	values('Fiat', 1)
 insert into tb_marca
-	values('Chevrolet', null)
+	values('Chevrolet', 1)
 insert into tb_marca
-	values('Renault', null)
+	values('Renault', 1)
 insert into tb_marca
-	values('Ferrari', null)
+	values('Ferrari', 1)
 insert into tb_marca
-	values('Porsh', null)
+	values('Porsh', 1)
 select * from tb_marca (nolock)
 
 insert into tb_modelo
-	values(1, 'Fusca', null)
+	values(1, 'Fusca', 1)
 insert into tb_modelo
-	values(2, 'Uno', null)
+	values(2, 'Uno', 1)
 insert into tb_modelo
-	values(3, 'Corsa', null)
+	values(3, 'Corsa', 1)
 insert into tb_modelo
-	values(4, 'Enzo', null)
+	values(4, 'Enzo', 1)
 insert into tb_modelo
-	values(1, 'Punto', null)
+	values(1, 'Punto', 1)
 select * from tb_modelo (nolock)
 
 
 insert into tb_veiculo
-	values('1', 'placa01', null, null, '2014', '2014', null, '120', null)
+	values('1', 'placa01', null, null, '2014', '2014', 1, '120', 1)
 insert into tb_veiculo
-	values('2', 'placa02', null, null, '2014', '2014', null, '140', null)
+	values('2', 'placa02', null, null, '2014', '2014', 1, '140', 1)
 insert into tb_veiculo
-	values('3', 'placa03', null, null, '2014', '2014', null, '160', null)
+	values('3', 'placa03', null, null, '2014', '2014', 1, '160', 1)
 insert into tb_veiculo
-	values('4', 'placa04', null, null, '2014', '2014', null, '180', null)
+	values('4', 'placa04', null, null, '2014', '2014', 1, '180', 1)
 insert into tb_veiculo
-	values('5', 'placa05', null, null, '2014', '2014', null, '200', null)
+	values('5', 'placa05', null, null, '2014', '2014', 1, '200', 1)
 
 insert into tb_veiculo
-	values('1', 'placa06', null, null, '2014', '2014', null, '220', null)
+	values('1', 'placa06', null, null, '2014', '2014', 1, '220', 1)
 insert into tb_veiculo
-	values('2', 'placa07', null, null, '2014', '2014', null, '240', null)
+	values('2', 'placa07', null, null, '2014', '2014', 1, '240', 1)
 insert into tb_veiculo
-	values('3', 'placa08', null, null, '2014', '2014', null, '260', null)
+	values('3', 'placa08', null, null, '2014', '2014', 1, '260', 1)
 insert into tb_veiculo
-	values('4', 'placa09', null, null, '2014', '2014', null, '280', null)
+	values('4', 'placa09', null, null, '2014', '2014', 1, '280', 1)
 insert into tb_veiculo
-	values('5', 'placa10', null, null, '2014', '2014', null, '400', null)
+	values('5', 'placa10', null, null, '2014', '2014', 1, '400', 1)
 select * from tb_veiculo (nolock)
 
 
@@ -393,15 +433,15 @@ select * from tb_moto (nolock)
 
 
 insert into tb_opcional
-	values('descricao1', null)
+	values('descricao1', 1)
 insert into tb_opcional
-	values('descricao2', null)
+	values('descricao2', 1)
 insert into tb_opcional
-	values('descricao3', null)
+	values('descricao3', 1)
 insert into tb_opcional
-	values('descricao4', null)
+	values('descricao4', 1)
 insert into tb_opcional
-	values('descricao5', null)
+	values('descricao5', 1)
 select * from tb_opcional (nolock)
 
 
@@ -445,15 +485,15 @@ select * from tb_veiculoMotorizacao (nolock)
 
 
 insert into tb_cor
-	values('descricao1', null)
+	values('descricao1', 1)
 insert into tb_cor
-	values('descricao2', null)
+	values('descricao2', 1)
 insert into tb_cor
-	values('descricao3', null)
+	values('descricao3', 1)
 insert into tb_cor
-	values('descricao4', null)
+	values('descricao4', 1)
 insert into tb_cor
-	values('descricao5', null)
+	values('descricao5', 1)
 select * from tb_cor (nolock)
 
 
@@ -471,15 +511,15 @@ select * from tb_veiculoCor (nolock)
 
 
 insert into tb_combustivel
-	values('descricao1', null)
+	values('descricao1', 1)
 insert into tb_combustivel
-	values('descricao2', null)
+	values('descricao2', 1)
 insert into tb_combustivel
-	values('descricao3', null)
+	values('descricao3', 1)
 insert into tb_combustivel
-	values('descricao4', null)
+	values('descricao4', 1)
 insert into tb_combustivel
-	values('descricao5', null)
+	values('descricao5', 1)
 select * from tb_combustivel (nolock)
 
 
