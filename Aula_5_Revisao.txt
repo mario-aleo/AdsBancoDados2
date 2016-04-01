@@ -1,1 +1,91 @@
+/*
+create database aula5
 
+go 
+
+use aula5
+
+go
+*/
+
+
+
+create table tb_orderBy(
+	id int identity,
+	nome varchar(50),
+	idade int
+)
+
+insert into tb_orderBy
+	values ('Joao', 29)
+insert into tb_orderBy
+	values ('Maria', 26)
+insert into tb_orderBy
+	values ('Thiago', 21)
+insert into tb_orderBy
+	values ('Ana', 23)
+insert into tb_orderBy
+	values ('Beatriz', 24)
+insert into tb_orderBy
+	values ('Mario', 22)
+
+select * from tb_orderBy (nolock)
+
+update tb_orderBy
+	set idade = 21
+		where id = 4
+
+select * from tb_orderBy (nolock)
+	order by nome
+
+select * from tb_orderBy (nolock)
+	order by idade
+
+select * from tb_orderBy (nolock)
+	order by id desc
+
+delete from tb_orderBy
+	where id = 3
+
+
+
+create table tb_pai(
+	id int identity,
+	marca varchar(50),
+	constraint pk_marca primary key (id)
+)
+
+insert into tb_pai
+	values('Ford'),
+	('Fiat'),
+	('Renault')
+
+create table tb_filho(
+	id int identity,
+	modelo varchar(50),
+	marca_id int,
+	constraint pk_modelo primary key (id),
+	constraint fk_marca foreign key (marca_id)
+		references tb_pai (id) on update set null on delete cascade
+)
+
+insert into tb_filho
+	values('Carro1', 1),
+	('Carro2', 1),
+	('Carro3', 2),
+	('Carro4', 3),
+	('Carro5', 3)
+
+select * from tb_pai (nolock)
+
+select * from tb_filho (nolock)
+
+delete from tb_filho
+	where id = 1
+
+delete from tb_pai
+	where id = 3
+
+select * from tb_pai (nolock)
+
+select * from tb_filho (nolock)
