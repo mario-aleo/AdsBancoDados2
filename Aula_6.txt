@@ -1,1 +1,84 @@
+create database aula6
+go
+use aula6
+go
+
+create table tb_produto (
+	codigo integer identity primary key,
+	nome varchar(50),
+	saldo integer,
+	preco decimal(10,2),
+	situacao char(1)
+)
+
+create index idx_produto_codigo
+	on tb_produto(codigo, preco)
+
+declare @cons integer;
+	 set @cons = 25; 
+while @cons < 250
+begin
+	insert tb_produto (nome, saldo, preco, situacao)
+		values (null, null, @cons, null)
+
+	set @cons = @cons + 2;
+end
+
+select * FROM tb_produto
+
+create table tb_produtoCaseiro (
+	codigo integer identity,
+	nome varchar(50)
+)
+
+create table tb_ingrediente (
+	codiog integer identity,
+	nome varchar(50)
+)
+
+insert tb_produtoCaseiro(nome)
+	values('Leite')
+insert tb_produtoCaseiro(nome)
+	values('Farinha')
+
+insert tb_ingrediente(nome)
+	values('Farinha')
+insert tb_ingrediente(nome)
+	values('Manteiga')
+insert tb_ingrediente(nome)
+	values('Pimenta')
+
+update tb_produto
+	set situacao = 'I'
+		where preco > 100
+
+declare @cons integer;
+	 set @cons = 1; 
+declare @val integer;
+	 set @val = 10;
+while @cons < 114
+begin
+	update tb_produto
+		set saldo = @val
+		where codigo = @cons
+
+	set @cons = @cons + 1
+	set @val = @val + 3
+end
+
+update tb_produto
+		set saldo = 349
+		where codigo = 114
+
+select * from tb_produto
+
+select AVG(preco) from tb_produto
+
+select SUM(preco) from tb_produto
+
+select MAX(preco) from tb_produto
+
+select MIN(preco) from tb_produto
+
+select COUNT(preco) from tb_produto
 
