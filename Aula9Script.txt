@@ -1,0 +1,28 @@
+create database aula9;
+go;
+use aula9;
+go;
+
+create table tb_vendedor(
+	codigo int identity,
+	nome varchar(50),
+	uf char(2)
+);
+
+insert into tb_vendedor
+	values ('Bruno', 'SP'),
+		   ('Mauro', 'CE'),
+		   ('Maria', null),
+		   ('Dione', 'PR');
+
+create view vw_vendedor as 
+	select * from tb_vendedor;
+	
+select * from vw_vendedor;
+
+alter view vw_vendedor as
+	select * from tb_vendedor
+		where uf is not null;
+
+select * from vw_vendedor;
+
