@@ -11,9 +11,9 @@ create table tb_vendedor(
 
 insert into tb_vendedor
 	values ('Bruno', 'SP'),
-		   ('Mauro', 'CE'),
-		   ('Maria', null),
-		   ('Dione', 'PR');
+	       ('Mauro', 'CE'),
+	       ('Maria', null),
+	       ('Dione', 'PR');
 
 create view vw_vendedor as 
 	select * from tb_vendedor;
