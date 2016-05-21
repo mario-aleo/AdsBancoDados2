@@ -7,15 +7,39 @@ create table tb_telefone(
 );
 
 insert into tb_telefone
-	values (11, 43, '3967-5444', 1),
-	       (11, 43, '3967-5444', 2),
-	       (11, 43, '3967-5444', 3),
-	       (11, 43, '3967-5444', 1),
-	       (11, 43, '3967-5444', 2),
-	       (11, 43, '3967-5444', 3),
-	       (11, 43, '3967-5444', 1),
-	       (11, 43, '3967-5444', 2),
-	       (11, 43, '3967-5444', 3),
-	       (11, 43, '3967-5444', 1),
-	       (11, 43, '3967-5444', 2),
-	       (11, 43, '3967-5444', 3);
+	values  (11, 43, '3967-5444', 1),
+		(11, 43, '3967-5444', 2),
+		(11, 43, '3967-5444', 3),
+	   	(11, 43, '3967-5444', 1),
+	   	(11, 43, '3967-5444', 2),
+	   	(11, 43, '3967-5444', 3),
+	   	(11, 43, '3967-5444', 1),
+	   	(11, 43, '3967-5444', 2),
+	   	(11, 43, '3967-5444', 3),
+	   	(11, 43, '3967-5444', 1),
+	   	(11, 43, '3967-5444', 2),
+	   	(11, 43, '3967-5444', 3);
+
+select * from tb_telefone;
+
+alter table tb_telefone
+	alter column numero varchar(10);
+
+declare @telefone varchar(10),
+		@id int;
+declare cursor_telefone cursor for
+			select id, numero
+				from tb_telefone;
+
+open cursor_telefone;
+	fetch next from cursor_telefone into @id, @telefone;
+	while @@FETCH_STATUS = 0
+		begin
+			update tb_telefone set numero = '9' + @telefone
+				where id = @id;
+			fetch next from cursor_telefone into @id, @telefone;
+		end;
+close cursor_telefone;
+deallocate cursor_telefone;
+
+select * from tb_telefone;
