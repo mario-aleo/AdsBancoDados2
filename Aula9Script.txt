@@ -3,6 +3,7 @@ go;
 use aula9;
 go;
 
+
 create table tb_vendedor(
 	codigo int identity,
 	nome varchar(50),
@@ -15,16 +16,19 @@ insert into tb_vendedor
 		   ('Maria', null),
 		   ('Dione', 'PR');
 
+
 create view vw_vendedor as 
 	select * from tb_vendedor;
 	
 select * from vw_vendedor;
+
 
 alter view vw_vendedor as
 	select * from tb_vendedor
 		where uf is not null;
 
 select * from vw_vendedor;
+
 
 declare @var1 as integer,
 		@var2 as integer;
@@ -46,3 +50,10 @@ print @codigo;
 print @nome;
 
 
+select case
+		when uf='SP' then 'Sao Paulo'
+		when uf='CE' then 'Ceara'
+		when uf='PR' then 'Parana'
+		when uf is null then 'Nao Existente'
+	end
+from tb_vendedor
