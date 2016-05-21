@@ -1,0 +1,6 @@
+create procedure sp_imprimirHora as
+	begin
+		print convert(varchar(10), getdate(), 103);
+	end
+
+execute sp_imprimirHora;
