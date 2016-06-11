@@ -43,3 +43,61 @@ close cursor_telefone;
 deallocate cursor_telefone;
 
 select * from tb_telefone;
+
+
+--create database db_cursor
+--go
+--use db_cursor
+--go
+
+create table tb_produto (
+	id integer identity,
+	nome varchar(50) not null,
+	descricao varchar(50) not null,
+	preco decimal(10,2) not null
+)
+
+insert into tb_produto
+values( 'ITEM UM', 'DESCRICAO UM', 10)
+insert into tb_produto
+values( 'ITEM DOIS', 'DESCRICAO DOIS', 20)
+insert into tb_produto
+values( 'ITEM TRES', 'DESCRICAO TRES', 30)
+insert into tb_produto
+values( 'ITEM QUATRO', 'DESCRICAO QUATRO', 40)
+insert into tb_produto
+values( 'ITEM CINCO', 'DESCRICAO CINCO', 50)
+insert into tb_produto
+values( 'ITEM SEIS', 'DESCRICAO SEIS', 60)
+insert into tb_produto
+values( 'ITEM SETE', 'DESCRICAO SETE', 70)
+insert into tb_produto
+values( 'ITEM OITO', 'DESCRICAO OITO', 80)
+insert into tb_produto
+values( 'ITEM NOVE', 'DESCRICAO NOVE', 90)
+insert into tb_produto
+values( 'ITEM DEZ', 'DESCRICAO DEZ', 100)
+
+
+DECLARE @preco_produto decimal(10,2); 
+  
+DECLARE addpreco_cursor CURSOR FOR   
+SELECT preco 
+FROM tb_produto
+ORDER BY id;  
+  
+OPEN addpreco_cursor  
+  
+FETCH NEXT FROM addpreco_cursor   
+INTO @preco_produto
+  
+WHILE @@FETCH_STATUS = 0  
+BEGIN
+    UPDATE tb_produto
+	SET preco = @preco_produto + @preco_produto * 0.1 
+	WHERE preco = @preco_produto
+END   
+CLOSE addpreco_cursor;  
+DEALLOCATE addpreco_cursor;
+
+SELECT * FROM tb_produto 
