@@ -55,49 +55,46 @@ create table tb_produto (
 	nome varchar(50) not null,
 	descricao varchar(50) not null,
 	preco decimal(10,2) not null
-)
+);
 
 insert into tb_produto
-values( 'ITEM UM', 'DESCRICAO UM', 10)
+	values( 'ITEM UM', 'DESCRICAO UM', 10);
 insert into tb_produto
-values( 'ITEM DOIS', 'DESCRICAO DOIS', 20)
+	values( 'ITEM DOIS', 'DESCRICAO DOIS', 20);
 insert into tb_produto
-values( 'ITEM TRES', 'DESCRICAO TRES', 30)
+	values( 'ITEM TRES', 'DESCRICAO TRES', 30);
 insert into tb_produto
-values( 'ITEM QUATRO', 'DESCRICAO QUATRO', 40)
+	values( 'ITEM QUATRO', 'DESCRICAO QUATRO', 40);
 insert into tb_produto
-values( 'ITEM CINCO', 'DESCRICAO CINCO', 50)
+	values( 'ITEM CINCO', 'DESCRICAO CINCO', 50);
 insert into tb_produto
-values( 'ITEM SEIS', 'DESCRICAO SEIS', 60)
+	values( 'ITEM SEIS', 'DESCRICAO SEIS', 60);
 insert into tb_produto
-values( 'ITEM SETE', 'DESCRICAO SETE', 70)
+	values( 'ITEM SETE', 'DESCRICAO SETE', 70);
 insert into tb_produto
-values( 'ITEM OITO', 'DESCRICAO OITO', 80)
+	values( 'ITEM OITO', 'DESCRICAO OITO', 80);
 insert into tb_produto
-values( 'ITEM NOVE', 'DESCRICAO NOVE', 90)
+	values( 'ITEM NOVE', 'DESCRICAO NOVE', 90);
 insert into tb_produto
-values( 'ITEM DEZ', 'DESCRICAO DEZ', 100)
+	values( 'ITEM DEZ', 'DESCRICAO DEZ', 100);
 
 
-DECLARE @preco_produto decimal(10,2); 
-  
-DECLARE addpreco_cursor CURSOR FOR   
-SELECT preco 
-FROM tb_produto
-ORDER BY id;  
-  
-OPEN addpreco_cursor  
-  
-FETCH NEXT FROM addpreco_cursor   
-INTO @preco_produto
-  
-WHILE @@FETCH_STATUS = 0  
-BEGIN
-    UPDATE tb_produto
-	SET preco = @preco_produto + @preco_produto * 0.1 
-	WHERE preco = @preco_produto
-END   
-CLOSE addpreco_cursor;  
-DEALLOCATE addpreco_cursor;
+declare @produto_preco decimal(10,2),
+		@produto_id integer;
+declare cursor_addvalor cursor for
+			select id, preco
+				from tb_produto;
 
-SELECT * FROM tb_produto 
+open cursor_addvalor
+	fetch next from cursor_addvalor into @produto_id, @produto_preco;
+	while @@FETCH_STATUS = 0
+		begin
+			update tb_produto 
+				set preco = @produto_preco + @produto_preco * 0.1
+				where id = @produto_id;
+			fetch next from cursor_addvalor into @produto_id, @produto_preco;
+		end
+close cursor_addvalor;
+deallocate cursor_addvalor;
+
+select * from tb_produto;
